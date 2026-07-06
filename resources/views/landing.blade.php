@@ -16,6 +16,7 @@
             <div class="brand-text">E-Lapor Sumberarum<span>Kalurahan Sumberarum</span></div>
         </a>
         <div class="nav-links">
+            <a href="#cara-lapor" class="nav-btn" id="navCaraLapor">Cara lapor</a>
             <a href="{{ route('admin.login') }}" class="nav-btn">Admin</a>
             <a href="{{ route('petugas.login') }}" class="nav-btn">Petugas</a>
             <a href="{{ route('warga.login') }}" class="nav-btn solid">Masuk Warga</a>
@@ -79,57 +80,97 @@
             <h2>Cara melapor</h2>
             <p>Panduan lengkap mengirim pengaduan, dari registrasi sampai laporan selesai ditangani</p>
         </div>
-        <div class="howto-list">
-            <div class="howto-item">
-                <div class="howto-num">1</div>
-                <div class="howto-body">
-                    <h3><i class="ti ti-user-plus"></i> Daftar akun warga</h3>
-                    <p>Klik tombol "Masuk / Daftar" lalu pilih "Daftar di sini". Isi data sesuai KTP dan Kartu Keluarga: NIK, Nomor KK, nama, alamat, RT/RW, email, nomor HP, dan buat password.</p>
-                    <span class="howto-note"><i class="ti ti-alert-triangle"></i> Gunakan data asli, NIK dan No KK akan dicek oleh admin</span>
-                </div>
+        <div class="wizard">
+            <div class="wizard-progress" id="wizProgress">
+                <button type="button" class="wiz-dot" data-goto="1">1</button><span class="wiz-dot-line"></span>
+                <button type="button" class="wiz-dot" data-goto="2">2</button><span class="wiz-dot-line"></span>
+                <button type="button" class="wiz-dot" data-goto="3">3</button><span class="wiz-dot-line"></span>
+                <button type="button" class="wiz-dot" data-goto="4">4</button><span class="wiz-dot-line"></span>
+                <button type="button" class="wiz-dot" data-goto="5">5</button><span class="wiz-dot-line"></span>
+                <button type="button" class="wiz-dot" data-goto="6">6</button><span class="wiz-dot-line"></span>
+                <button type="button" class="wiz-dot" data-goto="7">7</button>
             </div>
-            <div class="howto-item">
-                <div class="howto-num">2</div>
-                <div class="howto-body">
-                    <h3><i class="ti ti-clock-hour-4"></i> Tunggu verifikasi admin</h3>
-                    <p>Setelah daftar, admin kelurahan akan memeriksa kecocokan data kependudukan kamu. Proses ini biasanya selesai dalam 1&ndash;2 hari kerja.</p>
-                    <span class="howto-note ok"><i class="ti ti-bell"></i> Kamu bisa cek status dengan mencoba login secara berkala</span>
+
+            <div class="wizard-panel" id="wizPanel">
+
+                <div class="wiz-step" data-step="1" data-actor="warga">
+                    <div class="flow-num">1</div>
+                    <div class="flow-body">
+                        <span class="flow-tag warga">Warga</span>
+                        <h3><i class="ti ti-user-plus"></i> Daftar akun warga</h3>
+                        <p>Klik tombol "Masuk / Daftar" lalu pilih "Daftar di sini". Isi data sesuai KTP dan Kartu Keluarga: NIK, Nomor KK, nama, alamat, RT/RW, email, nomor HP, dan buat password.</p>
+                        <span class="howto-note"><i class="ti ti-alert-triangle"></i> Gunakan data asli, NIK dan No KK akan dicek oleh admin</span><br>
+                        <a href="{{ route('warga.register') }}" class="flow-goto"><i class="ti ti-arrow-right"></i> Buka halaman daftar</a>
+                    </div>
                 </div>
+
+                <div class="wiz-step" data-step="2" data-actor="admin">
+                    <div class="flow-num">2</div>
+                    <div class="flow-body">
+                        <span class="flow-tag admin">Admin</span>
+                        <h3><i class="ti ti-clock-hour-4"></i> Tunggu verifikasi admin</h3>
+                        <p>Setelah daftar, admin kelurahan akan memeriksa kecocokan data kependudukan kamu. Proses ini biasanya selesai dalam 1&ndash;2 hari kerja.</p>
+                        <span class="howto-note ok"><i class="ti ti-bell"></i> Kamu bisa cek status dengan mencoba login secara berkala</span><br>
+                        <a href="{{ route('warga.login') }}" class="flow-goto"><i class="ti ti-arrow-right"></i> Buka halaman login</a>
+                    </div>
+                </div>
+
+                <div class="wiz-step" data-step="3" data-actor="warga">
+                    <div class="flow-num">3</div>
+                    <div class="flow-body">
+                        <span class="flow-tag warga">Warga</span>
+                        <h3><i class="ti ti-login-2"></i> Login ke dashboard warga</h3>
+                        <p>Jika akun sudah terverifikasi, masuk menggunakan email dan password yang kamu daftarkan. Kamu akan diarahkan ke dashboard warga.</p>
+                        <a href="{{ route('warga.login') }}" class="flow-goto"><i class="ti ti-arrow-right"></i> Buka halaman login</a>
+                    </div>
+                </div>
+
+                <div class="wiz-step" data-step="4" data-actor="warga">
+                    <div class="flow-num">4</div>
+                    <div class="flow-body">
+                        <span class="flow-tag warga">Warga</span>
+                        <h3><i class="ti ti-edit"></i> Isi formulir pengaduan</h3>
+                        <p>Klik "Buat pengaduan", lalu lengkapi judul, kategori (jalan rusak, lampu mati, sampah, dll), lokasi kejadian, dan jelaskan keluhan secara detail. Lampirkan foto bukti jika ada.</p>
+                        <a href="{{ route('warga.pengaduan.buat') }}" class="flow-goto"><i class="ti ti-arrow-right"></i> Buka form pengaduan</a>
+                    </div>
+                </div>
+
+                <div class="wiz-step" data-step="5" data-actor="admin">
+                    <div class="flow-num">5</div>
+                    <div class="flow-body">
+                        <span class="flow-tag admin">Admin</span>
+                        <h3><i class="ti ti-clipboard-check"></i> Admin memvalidasi laporan</h3>
+                        <p>Admin kelurahan meninjau laporanmu, lalu menugaskannya ke petugas lapangan yang sesuai untuk ditindaklanjuti.</p>
+                        <a href="{{ route('admin.login') }}" class="flow-goto"><i class="ti ti-arrow-right"></i> Buka halaman admin</a>
+                    </div>
+                </div>
+
+                <div class="wiz-step" data-step="6" data-actor="petugas">
+                    <div class="flow-num">6</div>
+                    <div class="flow-body">
+                        <span class="flow-tag petugas">Petugas</span>
+                        <h3><i class="ti ti-tool"></i> Petugas menindaklanjuti</h3>
+                        <p>Petugas yang ditugaskan akan menangani laporan di lapangan dan memberi tanggapan tertulis pada setiap perkembangan.</p>
+                        <a href="{{ route('petugas.login') }}" class="flow-goto"><i class="ti ti-arrow-right"></i> Buka halaman petugas</a>
+                    </div>
+                </div>
+
+                <div class="wiz-step" data-step="7" data-actor="warga">
+                    <div class="flow-num">7</div>
+                    <div class="flow-body">
+                        <span class="flow-tag warga">Warga</span>
+                        <h3><i class="ti ti-circle-check"></i> Pantau status & hasil</h3>
+                        <p>Buka kembali dashboard warga kapan saja untuk melihat status terbaru: Menunggu, Diverifikasi, Diproses, Selesai, atau Ditolak &mdash; lengkap dengan tanggapan dari petugas.</p>
+                        <a href="{{ route('warga.dashboard') }}" class="flow-goto"><i class="ti ti-arrow-right"></i> Buka dashboard warga</a>
+                    </div>
+                </div>
+
             </div>
-            <div class="howto-item">
-                <div class="howto-num">3</div>
-                <div class="howto-body">
-                    <h3><i class="ti ti-login-2"></i> Login ke dashboard warga</h3>
-                    <p>Jika akun sudah terverifikasi, masuk menggunakan email dan password yang kamu daftarkan. Kamu akan diarahkan ke dashboard warga.</p>
-                </div>
-            </div>
-            <div class="howto-item">
-                <div class="howto-num">4</div>
-                <div class="howto-body">
-                    <h3><i class="ti ti-edit"></i> Isi formulir pengaduan</h3>
-                    <p>Klik "Buat pengaduan", lalu lengkapi judul, kategori (jalan rusak, lampu mati, sampah, dll), lokasi kejadian, dan jelaskan keluhan secara detail. Lampirkan foto bukti jika ada.</p>
-                </div>
-            </div>
-            <div class="howto-item">
-                <div class="howto-num">5</div>
-                <div class="howto-body">
-                    <h3><i class="ti ti-clipboard-check"></i> Admin memvalidasi laporan</h3>
-                    <p>Admin kelurahan meninjau laporanmu, lalu menugaskannya ke petugas lapangan yang sesuai untuk ditindaklanjuti.</p>
-                </div>
-            </div>
-            <div class="howto-item">
-                <div class="howto-num">6</div>
-                <div class="howto-body">
-                    <h3><i class="ti ti-tool"></i> Petugas menindaklanjuti</h3>
-                    <p>Petugas yang ditugaskan akan menangani laporan di lapangan dan memberi tanggapan tertulis pada setiap perkembangan.</p>
-                </div>
-            </div>
-            <div class="howto-item">
-                <div class="howto-num">7</div>
-                <div class="howto-body">
-                    <h3><i class="ti ti-circle-check"></i> Pantau status & hasil</h3>
-                    <p>Buka kembali dashboard warga kapan saja untuk melihat status terbaru: Menunggu, Diverifikasi, Diproses, Selesai, atau Ditolak &mdash; lengkap dengan tanggapan dari petugas.</p>
-                </div>
+
+            <div class="wizard-nav">
+                <button type="button" class="wiz-btn" id="wizPrev"><i class="ti ti-chevron-left"></i> Kembali</button>
+                <span class="wizard-count" id="wizCount">Langkah 1 dari 7</span>
+                <button type="button" class="wiz-btn primary" id="wizNext">Lanjut <i class="ti ti-chevron-right"></i></button>
             </div>
         </div>
         <div class="howto-cta">
@@ -141,5 +182,60 @@
 
 
     <div class="foot">&copy; 2026 Pemerintah Kalurahan Sumberarum &mdash; Layanan Pengaduan Digital</div>
+
+    <script>
+    (function () {
+        var steps = Array.prototype.slice.call(document.querySelectorAll('.wiz-step'));
+        var dots  = Array.prototype.slice.call(document.querySelectorAll('.wiz-dot'));
+        var total = steps.length;
+        var current = 1;
+
+        function render() {
+            steps.forEach(function (el) {
+                el.classList.toggle('active', Number(el.dataset.step) === current);
+            });
+            dots.forEach(function (dot) {
+                var n = Number(dot.dataset.goto);
+                dot.classList.toggle('active', n === current);
+                dot.classList.toggle('done', n < current);
+            });
+            document.getElementById('wizCount').textContent = 'Langkah ' + current + ' dari ' + total;
+            document.getElementById('wizPrev').disabled = current === 1;
+            var nextBtn = document.getElementById('wizNext');
+            if (current === total) {
+                nextBtn.innerHTML = 'Selesai <i class="ti ti-check"></i>';
+            } else {
+                nextBtn.innerHTML = 'Lanjut <i class="ti ti-chevron-right"></i>';
+            }
+        }
+
+        function goTo(n) {
+            current = Math.min(Math.max(n, 1), total);
+            render();
+        }
+
+        document.getElementById('wizPrev').addEventListener('click', function () { goTo(current - 1); });
+        document.getElementById('wizNext').addEventListener('click', function () {
+            if (current === total) {
+                document.querySelector('.howto-cta .btn-primary').focus();
+                return;
+            }
+            goTo(current + 1);
+        });
+        dots.forEach(function (dot) {
+            dot.addEventListener('click', function () { goTo(Number(dot.dataset.goto)); });
+        });
+
+        // Klik "Cara lapor" di navbar: selalu mulai dari Langkah 1
+        var navLink = document.getElementById('navCaraLapor');
+        if (navLink) {
+            navLink.addEventListener('click', function () {
+                goTo(1);
+            });
+        }
+
+        render();
+    })();
+    </script>
 </body>
 </html>
