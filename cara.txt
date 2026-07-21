@@ -1,0 +1,4 @@
+jika ingin login sebagai warga maka akses url = http://localhost/sumberarum/public/
+jika ingin login sebagai petugas maka akses url = http://localhost/sumberarum/public/petugas/login
+jika ingin registrasi sebagai petugas maka akses url = http://localhost/sumberarum/public/petugas/register
+jika ingin login sebagai admin maka akses url = http://localhost/sumberarum/public/admin/login
