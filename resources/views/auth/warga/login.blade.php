@@ -51,10 +51,6 @@
 
             <div class="alt-link">Belum punya akun? <a href="{{ route('warga.register') }}">Daftar di sini</a></div>
 
-            <div class="role-switch">
-                <a href="{{ route('admin.login') }}"><i class="ti ti-shield-lock"></i> Admin</a>
-                <a href="{{ route('petugas.login') }}"><i class="ti ti-tool"></i> Petugas</a>
-            </div>
         </div>
     </div>
     <script>

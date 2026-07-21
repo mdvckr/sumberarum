@@ -37,4 +37,30 @@ class PetugasAuthController extends Controller
         Auth::guard('petugas')->logout();
         return redirect()->route('petugas.login');
     }
+
+    public function showRegister()
+    {
+        return view('auth.petugas.register');
+    }
+
+    public function register(Request $request)
+    {
+        $request->validate([
+            'nama_petugas' => 'required|string|max:255',
+            'username' => 'required|string|max:255|unique:petugas,username',
+            'password' => 'required|string|min:6|confirmed',
+            'jabatan' => 'required|string|max:255',
+            'no_hp' => 'required|string|max:20',
+        ]);
+
+        Petugas::create([
+            'nama_petugas' => $request->nama_petugas,
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'jabatan' => $request->jabatan,
+            'no_hp' => $request->no_hp,
+        ]);
+
+        return redirect()->route('petugas.login')->with('success', 'Registrasi berhasil, silakan login.');
+    }
 }

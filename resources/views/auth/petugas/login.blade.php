@@ -20,6 +20,10 @@
         <p class="sub">Tindak lanjuti dan perbarui status pengaduan</p>
         </div>
 
+        @if(session('success'))
+            <div class="alert-success">{{ session('success') }}</div>
+        @endif
+
         @if($errors->any())
             <div class="alert-danger">
                 @foreach($errors->all() as $error)
@@ -40,6 +44,10 @@
             </div>
             <button type="submit" class="btn-primary">Masuk</button>
         </form>
+
+        <div class="alt-link" style="margin-top: 16px; text-align: center; font-size: 13.5px;">
+            Petugas baru? <a href="{{ route('petugas.register') }}" style="color: var(--blue-accent); font-weight: 600;">Daftar di sini</a>
+        </div>
 
         <div class="role-switch">
             <a href="{{ route('warga.login') }}"><i class="ti ti-user"></i> Warga</a>

@@ -7,9 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/dist/tabler-icons.min.css">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}?v={{ time() }}">
 </head>
-<body>
+<body class="@if(request()->is('warga*')) theme-warga @elseif(request()->is('petugas*')) theme-petugas @endif">
 <div class="app-shell">
     <aside class="sidebar">
         <a href="{{ route('home') }}" class="side-brand">

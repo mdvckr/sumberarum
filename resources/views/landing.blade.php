@@ -17,9 +17,11 @@
         </a>
         <div class="nav-links">
             <a href="#cara-lapor" class="nav-btn" id="navCaraLapor">Cara lapor</a>
-            <a href="{{ route('admin.login') }}" class="nav-btn">Admin</a>
-            <a href="{{ route('petugas.login') }}" class="nav-btn">Petugas</a>
-            <a href="{{ route('warga.login') }}" class="nav-btn solid">Masuk Warga</a>
+            @if(Auth::guard('warga')->check())
+                <a href="{{ route('warga.dashboard') }}" class="nav-btn solid">Dashboard Saya</a>
+            @else
+                <a href="{{ route('warga.login') }}" class="nav-btn solid">Masuk Warga</a>
+            @endif
         </div>
     </div>
 
@@ -28,8 +30,13 @@
         <h1>Sampaikan keluhan warga, kami tindaklanjuti dengan cepat</h1>
         <p>Laporkan jalan rusak, lampu mati, hingga keluhan administrasi langsung dari rumah. Transparan dan bisa dipantau statusnya kapan saja.</p>
         <div class="hero-actions">
-            <a href="{{ route('warga.register') }}" class="btn-primary">Buat laporan <i class="ti ti-arrow-right"></i></a>
-            <a href="{{ route('warga.login') }}" class="btn-secondary">Lacak status laporan</a>
+            @if(Auth::guard('warga')->check())
+                <a href="{{ route('warga.pengaduan.buat') }}" class="btn-primary">Buat laporan <i class="ti ti-arrow-right"></i></a>
+                <a href="{{ route('warga.dashboard') }}" class="btn-secondary">Lacak status laporan</a>
+            @else
+                <a href="{{ route('warga.register') }}" class="btn-primary">Buat laporan <i class="ti ti-arrow-right"></i></a>
+                <a href="{{ route('warga.login') }}" class="btn-secondary">Lacak status laporan</a>
+            @endif
         </div>
         <div class="stats">
             <div class="stat"><div class="num">1.284</div><div class="label">Warga terdaftar</div></div>
@@ -174,8 +181,13 @@
             </div>
         </div>
         <div class="howto-cta">
-            <p><strong>Siap membuat laporan?</strong>Daftar sekarang, prosesnya hanya butuh beberapa menit</p>
-            <a href="{{ route('warga.register') }}" class="btn-primary">Daftar sekarang <i class="ti ti-arrow-right"></i></a>
+            @if(Auth::guard('warga')->check())
+                <p><strong>Siap membuat laporan?</strong>Sampaikan keluhan Anda sekarang juga</p>
+                <a href="{{ route('warga.pengaduan.buat') }}" class="btn-primary">Buat laporan sekarang <i class="ti ti-arrow-right"></i></a>
+            @else
+                <p><strong>Siap membuat laporan?</strong>Daftar sekarang, prosesnya hanya butuh beberapa menit</p>
+                <a href="{{ route('warga.register') }}" class="btn-primary">Daftar sekarang <i class="ti ti-arrow-right"></i></a>
+            @endif
         </div>
     </div>
 

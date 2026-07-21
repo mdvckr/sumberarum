@@ -37,8 +37,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::middleware('auth:admin')->group(function () {
         Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('dashboard');
+        
+        // Verifikasi Warga
         Route::get('/verifikasi', [VerifikasiWargaController::class, 'index'])->name('verifikasi.index');
         Route::post('/verifikasi/{id}', [VerifikasiWargaController::class, 'proses'])->name('verifikasi.proses');
+        Route::post('/verifikasi/{id}/ajax', [VerifikasiWargaController::class, 'prosesAjax'])->name('verifikasi.ajax'); // Route tambahan untuk AJAX
+
+        // Kelola Pengaduan Admin
         Route::get('/pengaduan', [AdminPengaduan::class, 'index'])->name('pengaduan.index');
         Route::get('/pengaduan/{id}', [AdminPengaduan::class, 'detail'])->name('pengaduan.detail');
         Route::post('/pengaduan/{id}/validasi', [AdminPengaduan::class, 'validasi'])->name('pengaduan.validasi');
@@ -46,6 +51,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 Route::prefix('petugas')->name('petugas.')->group(function () {
+    Route::get('/register', [PetugasAuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [PetugasAuthController::class, 'register']);
     Route::get('/login', [PetugasAuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [PetugasAuthController::class, 'login']);
     Route::post('/logout', [PetugasAuthController::class, 'logout'])->name('logout');

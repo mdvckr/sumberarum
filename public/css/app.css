@@ -47,6 +47,19 @@ a {
     box-shadow:4px 0 24px rgba(11,37,69,.15);
     z-index:10;
 }
+/* Warga Theme Overrides */
+body.theme-warga .sidebar { background:linear-gradient(180deg, #0a4d2e 0%, #0d6e41 60%, #118f54 100%); }
+body.theme-warga .btn-primary { background:linear-gradient(135deg, #118f54, #0a4d2e); box-shadow:0 4px 12px rgba(17,143,84,.25); }
+body.theme-warga .side-link.active { background:#118f54; }
+body.theme-warga .side-user-avatar { background:#118f54; }
+body.theme-warga .form-control:focus, body.theme-warga .form-select:focus, body.theme-warga textarea:focus { border-color:#118f54; box-shadow:inset 0 1px 3px rgba(0,0,0,.02), 0 0 0 4px rgba(17,143,84,.15); }
+
+/* Petugas Theme Overrides */
+body.theme-petugas .sidebar { background:linear-gradient(180deg, #8a6c08 0%, #a6840d 60%, #c49d12 100%); }
+body.theme-petugas .btn-primary { background:linear-gradient(135deg, #c49d12, #8a6c08); box-shadow:0 4px 12px rgba(196,157,18,.25); }
+body.theme-petugas .side-link.active { background:#c49d12; }
+body.theme-petugas .side-user-avatar { background:#c49d12; }
+body.theme-petugas .form-control:focus, body.theme-petugas .form-select:focus, body.theme-petugas textarea:focus { border-color:#c49d12; box-shadow:inset 0 1px 3px rgba(0,0,0,.02), 0 0 0 4px rgba(196,157,18,.15); }
 .side-brand {
     display:flex;
     align-items:center;

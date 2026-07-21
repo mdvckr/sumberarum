@@ -233,10 +233,22 @@
         </div>
         @else
         <div class="card">
-            <div class="card-body">
-                <span class="badge badge-ok" style="padding:10px 16px; font-size:13px;">
+            <div class="card-body" style="display:flex; flex-direction:column; gap:16px;">
+                <span class="badge badge-ok" style="padding:10px 16px; font-size:13px; align-self:flex-start;">
                     <i class="ti ti-circle-check"></i> Pengaduan sudah selesai ditangani
                 </span>
+                @if($pengaduan->warga && $pengaduan->warga->no_hp)
+                    @php
+                        $phone = $pengaduan->warga->no_hp;
+                        if(substr($phone, 0, 1) == '0') {
+                            $phone = '62' . substr($phone, 1);
+                        }
+                        $message = urlencode("Halo, kami dari petugas Kalurahan Sumberarum ingin menginformasikan bahwa pengaduan Anda dengan judul '{$pengaduan->judul}' telah selesai ditangani.");
+                    @endphp
+                    <a href="https://wa.me/{{ $phone }}?text={{ $message }}" target="_blank" class="btn btn-success" style="align-self:flex-start; background-color:#25D366; color:#fff; border:none; padding:10px 16px; font-size:13px;">
+                        <i class="ti ti-brand-whatsapp" style="font-size:18px;"></i> Kirim WhatsApp ke Pelapor
+                    </a>
+                @endif
             </div>
         </div>
         @endif

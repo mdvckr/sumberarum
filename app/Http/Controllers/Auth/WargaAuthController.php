@@ -68,7 +68,7 @@ class WargaAuthController extends Controller
         }
 
         Auth::guard('warga')->login($warga);
-        return redirect()->route('warga.dashboard');
+        return redirect()->route('home')->with('success', 'Berhasil masuk. Silakan buat laporan atau pantau pengaduan Anda.');
     }
 
     public function logout()
