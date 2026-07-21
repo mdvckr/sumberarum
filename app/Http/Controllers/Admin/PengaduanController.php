@@ -40,4 +40,11 @@ class PengaduanController extends Controller
         return redirect()->route('admin.pengaduan.detail', $id)
                          ->with('success', 'Validasi berhasil disimpan.');
     }
+
+    public function destroy($id)
+    {
+        $pengaduan = Pengaduan::findOrFail($id);
+        $pengaduan->delete();
+        return response()->json(['success' => true, 'message' => 'Pengaduan berhasil dihapus.']);
+    }
 }

@@ -27,6 +27,11 @@ return [
             'driver' => 'session',
             'provider' => 'petugas',
         ],
+
+        'lurah' => [
+            'driver' => 'session',
+            'provider' => 'lurahs',
+        ],
     ],
 
     'providers' => [
@@ -48,6 +53,11 @@ return [
         'petugas' => [
             'driver' => 'eloquent',
             'model' => App\Models\Petugas::class,
+        ],
+
+        'lurahs' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Lurah::class,
         ],
     ],
 

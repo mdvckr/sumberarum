@@ -15,11 +15,12 @@
 
 @section('content')
 <div class="card">
-    <div class="card-head">
-        <h2>Menunggu verifikasi (<span id="counter-warga">{{ $wargas->count() }}</span>)</h2>
-    </div>
-
-    <!-- Container untuk pesan notifikasi opsional -->
+    <div class="card-head d-flex justify-content-between align-items-center">
+        <h2 class="mb-0">Menunggu verifikasi (<span id="counter-warga">{{ $wargas->count() }}</span>)</h2>
+        <div class="search-box">
+            <input type="text" id="search-input" class="form-control form-control-sm" placeholder="Cari NIK atau Nama..." style="width: 250px;">
+        </div>
+    </div>    <!-- Container untuk pesan notifikasi opsional -->
     <div id="alert-container" style="padding: 0 16px;"></div>
 
     <table>
@@ -68,10 +69,17 @@
 
 <script>
     function prosesVerifikasi(idWarga, statusNilai) {
-        if (!confirm(`Apakah Anda yakin ingin memproses verifikasi ini menjadi "${statusNilai}"?`)) {
-            return;
-        }
-
+        Swal.fire({
+            title: 'Konfirmasi Verifikasi',
+            text: `Apakah Anda yakin ingin memproses verifikasi ini menjadi "${statusNilai}"?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ya, Proses!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
         // Menggunakan helper route() Laravel di dalam JS agar jalur URL dinamis dan aman
         const url = "{{ route('admin.verifikasi.ajax', ':id') }}".replace(':id', idWarga);
 
@@ -119,14 +127,27 @@
                         `;
                     }
                 }
+                Swal.fire('Berhasil!', data.message, 'success');
             } else {
-                alert('Gagal memproses verifikasi dari server.');
+                Swal.fire('Gagal!', 'Gagal memproses verifikasi dari server.', 'error');
             }
         })
         .catch(error => {
             console.error('Terjadi kesalahan:', error);
-            alert('Terjadi kesalahan koneksi ke server. (Cek F12 Console untuk detail)');
+            Swal.fire('Error!', 'Terjadi kesalahan koneksi ke server. (Cek F12 Console untuk detail)', 'error');
+        });
+            }
         });
     }
+
+    // Search AJAX Logic
+    document.getElementById('search-input').addEventListener('keyup', function() {
+        let keyword = this.value;
+        fetch(`{{ route('admin.verifikasi.search') }}?q=${keyword}`)
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('table-warga-body').innerHTML = html;
+            });
+    });
 </script>
 @endsection

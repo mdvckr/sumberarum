@@ -59,4 +59,16 @@ class VerifikasiWargaController extends Controller
             'id_warga' => $id
         ]);
     }
+
+    public function search(Request $request)
+    {
+        $keyword = $request->q;
+        $wargas = Warga::where('status_verifikasi', 'menunggu')
+            ->where(function($query) use ($keyword) {
+                $query->where('nama', 'like', "%{$keyword}%")
+                      ->orWhere('nik', 'like', "%{$keyword}%");
+            })->get();
+            
+        return view('admin.verifikasi.partial_table', compact('wargas'));
+    }
 }

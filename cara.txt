@@ -2,3 +2,7 @@ jika ingin login sebagai warga maka akses url = http://localhost/sumberarum/publ
 jika ingin login sebagai petugas maka akses url = http://localhost/sumberarum/public/petugas/login
 jika ingin registrasi sebagai petugas maka akses url = http://localhost/sumberarum/public/petugas/register
 jika ingin login sebagai admin maka akses url = http://localhost/sumberarum/public/admin/login
+jika ingin login sebagai lurah maka akses url = http://localhost/sumberarum/public/lurah/login  
+
+username = lurah
+password = password
